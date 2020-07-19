@@ -5,4 +5,4 @@ permalink: /books/
 ---
 Here is the list of books i am reading:
 - The Idiot - Dostoyevsky
-- TBC
+- Life After Google - George Gilder

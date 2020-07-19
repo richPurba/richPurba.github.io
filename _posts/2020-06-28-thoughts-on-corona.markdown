@@ -2,7 +2,7 @@
 layout: post
 title:  "Thoughts on Corona"
 date:   2020-06-28 18:06:56 +0200
-categories: first
+categories: random
 ---
 
 # A Difficult time
