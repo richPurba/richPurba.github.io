@@ -49,7 +49,7 @@ public int compareToIgnoreCase(String str) {
     }
 ```
 where `CASE_INSENSITIVE_ORDER` is a field that contains an inner class that implements `Comparator<String>`. The lambda expression in Java captures all of the manipulation of the types very well: it knows that the method reference of `compareToIgnoreCase` has to be implemented such that you have two paramters to do the operation. As such it could fit `BiConsumer` interface.
-> BiConsumer<String,String> bc = String::compareToIgnoreCase;
+> `BiConsumer<String,String> bc = String::compareToIgnoreCase;`
 
 in a way that the operation or in the form of Lambda of Church `M[x]` will take the two types, say `a` and `b`, and do something like `a.compareToIgnoreCase(b)`. Remember that `BiConsumer` has generic `T` and `U`, which in case of `bc` above, `String` for both. And the specification of both type have to be both String and String, which is true in `compareToIgnoreCase` case (no pun intended). 
 
@@ -68,4 +68,4 @@ Church's idea is pretty good and fundamenal to today's programming practices. Th
 
 > (*Specification*)[**Identifcation**] *application*
 
-In the example above, `ℷx.M[x]` gives you an example. But there is a better abstraction: `(ℷx)[f(x)]g` such that it equals to `g(x)` and equals to `x+1`. The `(ℷx)` is the *Specification`, the `f(x)` is **Identification** and g is the *application*. 
+In the example above, `ℷx.M[x]` gives you an example. But there is a better abstraction: `(ℷx)[f(x)]g` such that it equals to `g(x)` and equals to `x+1`. The `(ℷx)` is the *Specification*, the `f(x)` is **Identification** and g is the *application*. 
