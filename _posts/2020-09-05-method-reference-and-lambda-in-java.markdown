@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Method Reference and Lambda in Java"
-date:   2020-07-04 00:00:00+02:00
+date:   2020-09-05 00:00:00+02:00
 categories: java
 ---
 
