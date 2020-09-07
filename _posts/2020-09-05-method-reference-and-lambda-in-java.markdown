@@ -41,17 +41,10 @@ JDK or Oracle will give you the list of kind of method reference that you can ap
 4. Reference to a constructor. In Java, somehow you can treat the keyword `new` if it's a method. `SomeClass::new` is somehow awkward but possible. This reminds me that when you have a nested classes, you would instantiate that inner class like `new OuterClass.new InnerClass();`
 
 ### So back to the point 3... 
-The actual comparison in method `sort` of `Arrays` utility class is being done or calculated by the some logic. The `sort` receives parameters `T[]`, which is generic `T`  (if you don't understand this, i will try to cover later. You can try to read [Benjamin Pierce's Type and Programming Language](https://www.cis.upenn.edu/~bcpierce/tapl/) as a starter) and `Comparator<? super T>`, which is a functional interface with lowerbound wildcard of generic `T` (which means you can provide any other object from `T` up to `Object` ). The second parameter is quite important to understand how it accepts the arbitrary objects in the operation of `sort`! But it has also to obey the `Comparator<? super T>` as a type! This means actually, somewhere in the code, there should be some operation using `Comparator`. This is actually true. 
-
-```
-public int compareToIgnoreCase(String str) {
-      return CASE_INSENSITIVE_ORDER.compare(this, str);
-    }
-```
-where `CASE_INSENSITIVE_ORDER` is a field that contains an inner class that implements `Comparator<String>`. The lambda expression in Java captures all of the manipulation of the types very well: it knows that the method reference of `compareToIgnoreCase` has to be implemented such that you have two paramters to do the operation. As such it could fit `BiConsumer` interface.
+The actual comparison in method `sort` of `Arrays` utility class is being done or calculated by the some logic. The `sort` receives parameters `T[]`, which is generic `T`  (if you don't understand this, i will try to cover later. You can try to read [Benjamin Pierce's Type and Programming Language](https://www.cis.upenn.edu/~bcpierce/tapl/) as a starter) and `Comparator<? super T>`, which is a functional interface with lowerbound wildcard of generic `T` (which means you can provide any other object from `T` up to `Object` ). The lambda expression in Java captures all of the manipulation of the types very well: it knows that the method reference of `compareToIgnoreCase` has to be implemented such that you have two paramters to do the operation. As such it could fit `BiConsumer` interface.
 > `BiConsumer<String,String> bc = String::compareToIgnoreCase;`
 
-in a way that the operation or in the form of Lambda of Church `M[x]` will take the two types, say `a` and `b`, and do something like `a.compareToIgnoreCase(b)`. Remember that `BiConsumer` has generic `T` and `U` as inputs, which in case of `bc` above, `String` for both arbitrary operations between `String` in `compareToIgnoreCase`. And the specification of both type have to be both `String` and `String` (or `CharSequence`, but since `String` `implements` `CharSequence`, they arey interchangeable), which is true in `compareToIgnoreCase` case (no pun intended). 
+in a way that the operation or in the form of Lambda of Church `M[x]` will take the two types, say `a` and `b`, and do something like `a.compareToIgnoreCase(b)`, or in the java lambda: `(a,b) -> a.compareToIgnoreCase(b)`. Remember that `BiConsumer` has generic `T` and `U` as inputs, which in case of `bc` above, `String` for both arbitrary operations between `String` in `compareToIgnoreCase`. And the specification of both type have to be both `String` and `String` (or `CharSequence`, but since `String` `implements` `CharSequence`, they arey interchangeable), which is true in `compareToIgnoreCase` case (no pun intended). 
 
 ## Practical things to remember
 If you find this so abstract to understand, i will give you some key takeaways. 
@@ -63,6 +56,7 @@ This compiles because `startsWith` expects an *operation* of the parameter objec
 > `String a = "a"; prdct.test(a); // depends how you declare thisIsAString` <br/>
 
 which reads *my operation is to be that `startsWith` from an object `thisIsAString` and impose that rule on object `a`* 
+But what about `Consumer<String> cnsm = String::equals` ? This doesn't compile? It turns out, again, the abstraction of the operation doesn't work. Here is the lambda operation: `(a,b) -> a.equals(b)` What's wrong? Because there are two Types by `Consumer` has a parameterized Type `<U>`. Thus it is correct if we use `BiConsumer`.
 
 ### Church's Formal Definition
 Church's idea is pretty good and fundamenal to today's programming practices. The abstraction is quite hard but i can write in much simpler words:
