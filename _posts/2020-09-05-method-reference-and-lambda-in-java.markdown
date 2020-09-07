@@ -35,9 +35,9 @@ Now think about that in Java. JDK provides you the many functional interface lik
 JDK or Oracle will give you the list of kind of method reference that you can apply for this:
 1. Reference to a *static method*. Easy enough, just use `String::join`. `join` method signature is `public static String join(CharSequence delimiter, CharSequence... elements)`
 2. Reference to an *instance method* of a *particular object*. Just like i mentioned about: `a::equals`. `a` is that particular object
-3. Reference to an *instance method* of an *arbitrary object*. This is quite hard. Arbitrary means that you do want to use some operation without knowing the order which one is manipulated under. Say following:
+3. Reference to an *instance method* of an *arbitrary object*. This is quite hard. Arbitrary means that you do want to use some operation without knowing the order which one is manipulated under. A better way of rephrasing this is by saying which instance method that we are going to use using number of parameter. Say following:
 > `String[] strings = {"a","b","c"};  Arrays.sort(strings, String::compareToIgnoreCase);`
-<br/>Usually, you would want to use `Arrays.sort(strings, (a,b)-> a.compareToIgnoreCase(b))`. And clearly this means that `a` and `b` are arbitrary object. And if you look at the method signature of `sort` from utility class `sort` you will find: `public static <T> void sort(T[] a, Comparator<? super T> c)`. We will get back to this.
+<br/> `compareToIgnoreCase` receives a `String` as a parameter and in this case you want to use any arbitrary object to as a parameter and to compare it with different oject. Say another example is `BiConsumer<String,String> bicns = String::compareToIgnoreCase;`
 4. Reference to a constructor. In Java, somehow you can treat the keyword `new` if it's a method. `SomeClass::new` is somehow awkward but possible. This reminds me that when you have a nested classes, you would instantiate that inner class like `new OuterClass.new InnerClass();`
 
 ### So back to the point 3... 
@@ -51,21 +51,22 @@ public int compareToIgnoreCase(String str) {
 where `CASE_INSENSITIVE_ORDER` is a field that contains an inner class that implements `Comparator<String>`. The lambda expression in Java captures all of the manipulation of the types very well: it knows that the method reference of `compareToIgnoreCase` has to be implemented such that you have two paramters to do the operation. As such it could fit `BiConsumer` interface.
 > `BiConsumer<String,String> bc = String::compareToIgnoreCase;`
 
-in a way that the operation or in the form of Lambda of Church `M[x]` will take the two types, say `a` and `b`, and do something like `a.compareToIgnoreCase(b)`. Remember that `BiConsumer` has generic `T` and `U`, which in case of `bc` above, `String` for both. And the specification of both type have to be both `String` and `String` (or `CharSequence`, but since `String` `implements` `CharSequence`, they arey interchangeable), which is true in `compareToIgnoreCase` case (no pun intended). 
+in a way that the operation or in the form of Lambda of Church `M[x]` will take the two types, say `a` and `b`, and do something like `a.compareToIgnoreCase(b)`. Remember that `BiConsumer` has generic `T` and `U` as inputs, which in case of `bc` above, `String` for both arbitrary operations between `String` in `compareToIgnoreCase`. And the specification of both type have to be both `String` and `String` (or `CharSequence`, but since `String` `implements` `CharSequence`, they arey interchangeable), which is true in `compareToIgnoreCase` case (no pun intended). 
 
 ## Practical things to remember
 If you find this so abstract to understand, i will give you some key takeaways. 
 You want to have an abstraction of operation/application from Types. First, you want to know whether to use *Static methods* or *instance methods* (constructor in this case is also instance method). 
 ### Which one is to use? 
-First check the parameter(s) of that method and the return type. See if the parameter(s) (receive)s certain type and what it returns as a Type. And you can decide the appropriate Functional Interface (if you want to use it) or operations that can use lambda. Practically you can just type things down in your IDE and see if it compiles. But that's too easy. If you keep the previous thing in mind, you can master this Method Reference just by understanding how the operations works and how type can be manipulated under your desired operation.
-### Example...
-For example, in `String#join()` it receives a parameter `CharSequence` and `CharSequence` varargs. The first argument is the delimiter and the second is the string(s). You could use this Static method to receive the delimiter and the String you want to join and decide how to use it.
-On instance method, you could use `compareToIgnoreCase` for the same reason.
-If you see this articulation, you understand that the type operations fit perfectly to lambda and JDK can type-check your formulation consistently. 
+First check the parameter(s) of that method and the return type. And see if you *need* operation on that Type. If you need operation on *any* Type, doesn't matter which object, then you should use the `Type::methodName` pattern. For example, while `thisIsAString::isEmpty` doesn't work on an instance of `thisIsAString`, code `String::isEmpty` works on arbitrary object, especially if you want to declare it to a reference `Consumer<String>`. The former is trying to make a lambda operation based on specific instance or reference of a Type that is really not type free, but bound to a variable. Whereas `String::isEmpty` is not bound to any type or instance. <br/>
+If you take `thisIsAString` and do this `Predicate<String> prdct = thisIsAString::startsWith` do you think this compiles? <br/>
+This compiles because `startsWith` expects an *operation* of the parameter object `String`. There is an expectation to implement this method such that when `prdct` is used, it expects that implementation to be *concrete*:
+> `String a = "a"; prdct.test(a); // depends how you declare thisIsAString` <br/>
+
+which reads *my operation is to be that `startsWith` from an object `thisIsAString` and impose that rule on object `a`* 
 
 ### Church's Formal Definition
 Church's idea is pretty good and fundamenal to today's programming practices. The abstraction is quite hard but i can write in much simpler words:
 
 > (*Specification*)[**Identifcation**] *application*
 
-In the example above, `ℷx.M[x]` gives you an example. But there is a better abstraction: `(ℷx)[f(x)]g` such that it equals to `g(x)` and equals to `x+1`. The `(ℷx)` is the *Specification*, the `f(x)` is **Identification** and g is the *application*. 
+In the example above, `ℷx.M[x]` gives you an idea about how this works. But there is a better abstraction: `(ℷx)[f(x)]g` such that it equals to `g(x)` and equals to `x+1`. The `(ℷx)` is the *Specification*, the `f(x)` is **Identification** and g is the *application*. We have mentioned this word *application* many times, which we phrased it as operation. 
