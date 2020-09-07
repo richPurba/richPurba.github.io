@@ -50,13 +50,13 @@ in a way that the operation or in the form of Lambda of Church `M[x]` will take 
 If you find this so abstract to understand, i will give you some key takeaways. 
 You want to have an abstraction of operation/application from Types. First, you want to know whether to use *Static methods* or *instance methods* (constructor in this case is also instance method). 
 ### Which one is to use? 
-First check the parameter(s) of that method and the return type. And see if you *need* operation on that Type. If you need operation on *any* Type, doesn't matter which object, then you should use the `Type::methodName` pattern. For example, while `thisIsAString::isEmpty` doesn't work on an instance of `thisIsAString`, code `String::isEmpty` works on arbitrary object, especially if you want to declare it to a reference `Consumer<String>`. The former is trying to make a lambda operation based on specific instance or reference of a Type that is really not type free, but bound to a variable. Whereas `String::isEmpty` is not bound to any type or instance. <br/>
+First check the parameter(s) of that method and the return type. And see if you *need* operation on that parameter's Type. If you need operation on *any* Type, doesn't matter which object, then you should use the `Type::methodName` pattern. For example, while `thisIsAString::isEmpty` doesn't work on an instance of `thisIsAString`, code `String::isEmpty` works on arbitrary object, especially if you want to declare it to a reference `Consumer<String>`. The former is trying to make a lambda operation based on specific instance or reference of a Type that is really not type free, but bound to a variable. Whereas `String::isEmpty` is not bound to any type or instance. <br/>
 If you take `thisIsAString` and do this `Predicate<String> prdct = thisIsAString::startsWith` do you think this compiles? <br/>
 This compiles because `startsWith` expects an *operation* of the parameter object `String`. There is an expectation to implement this method such that when `prdct` is used, it expects that implementation to be *concrete*:
 > `String a = "a"; prdct.test(a); // depends how you declare thisIsAString` <br/>
 
-which reads *my operation is to be that `startsWith` from an object `thisIsAString` and impose that rule on object `a`* 
-But what about `Consumer<String> cnsm = String::equals` ? This doesn't compile? It turns out, again, the abstraction of the operation doesn't work. Here is the lambda operation: `(a,b) -> a.equals(b)` What's wrong? Because there are two Types by `Consumer` has a parameterized Type `<U>`. Thus it is correct if we use `BiConsumer`.
+which reads *my operation is to be that `startsWith` an object `thisIsAString` and impose that rule on object `a`* 
+But what about `Consumer<String> cnsm = String::equals` ? This doesn't compile? It turns out, again, the abstraction of the operation doesn't work. Here is the lambda operation: `(a,b) -> a.equals(b)` What's wrong? Because there are two Types needed to accomplish this lambda operation and `Consumer` has a parameterized Type `<U>`. Thus it is correct if we use `BiConsumer` which is parameterized with `T` and `U`.
 
 ### Church's Formal Definition
 Church's idea is pretty good and fundamenal to today's programming practices. The abstraction is quite hard but i can write in much simpler words:
