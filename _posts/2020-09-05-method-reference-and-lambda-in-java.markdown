@@ -27,7 +27,7 @@ Can you abstract away this operation such that you can make an operation **about
 
 > `ℷx.M[x]`
 
-This means that you have a description about `x` ( that is`ℷx`) that has a well-formed construction of a particular operation (`f(x) = x + 1`).  Remember that `x` here is not the variable like you usually put in your Algebra. But it is another abstract layer of that function. Church proudly presented this as a *type free* operation. This is the kind of operation that, within its notational system, sustains no contradiction in any symbolic manipulation you want to make.
+This means that you have a description about `x` ( that is `ℷx`) that has a well-formed construction of a particular operation (`f(x) = x + 1`).  Remember that `x` here is not the variable like you usually put in your Algebra. But it is another abstract layer of that function. Church proudly presented this as a *type free* operation. This is the kind of operation that, within its notational system, sustains no contradiction in any symbolic manipulation you want to make.
 
 Now think about that in Java. JDK provides you the many functional interface like `Predicate`, `Consumer`, `Supplier`, or something of your own. And you can make many operations with the concept of Lamda, where type operation is provided and thus can be manipulated within its own notational system. In the previous Java example, it should be easy to grasp: i want to make an operation *about* a String where method (in this case instance method) `equals` has to be used. I don't care about the actual value of `a`, whether it is `"James"` or `"Nothing"`.
 
