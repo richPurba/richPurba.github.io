@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Where the money goes part 2"
-date:   2020-07-04 00:00:00+02:00
+date:   2020-11-01 00:00:00+02:00
 categories: investment
 ---
 
