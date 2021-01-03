@@ -4,6 +4,9 @@ title:  "Where the money goes"
 date:   2020-07-04 00:00:00+02:00
 categories: investment
 ---
+> DISCLAIMER: The views and opinions expressed here are those of the author and do not necessarily reflect the official policy or position of Accenture. Any content provided by our bloggers or authors are of their opinion and are not intended to malign any religion, ethnic group, club, organization, company, individual or anyone or anything.
+
+
 
 # Do you care about your money?
 Such a strange dream i had as a kid. I was amazed by high net-worth individuals around the world. Little did i knew about how the media defined 'net-worth'. The more i realize now that these individuals know how to make a good invesment thus net-worth is a slightly misunderstood term. They simply earn their net-worth not from accumulating balance on their bank account!

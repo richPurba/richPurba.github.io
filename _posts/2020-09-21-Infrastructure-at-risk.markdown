@@ -4,6 +4,8 @@ title:  "Infrastructure at Risk"
 date:   2020-09-21 00:00:00+02:00
 categories: investment, DevOps, Blockchain
 ---
+> DISCLAIMER: The views and opinions expressed here are those of the author and do not necessarily reflect the official policy or position of Accenture. Any content provided by our bloggers or authors are of their opinion and are not intended to malign any religion, ethnic group, club, organization, company, individual or anyone or anything.
+
 
 # Deploy and Conquer?
 An authoritarian is a leader that dictates his or her own opinion about that which is necessary to do, especially in excluding the majority to make any decision to overrule or object any decision from that authority. Well Apple describes this very much. Despite the fact that many Hollywood producers created many Steve Jobs movies showing how popular they are in the narrative of the modern world, this company is a breed of supremacists of technology. It recently removed [Epic's Game](www.epicgames.com) from its app store. Can Epic's Game say no to that? Of course they don't have such power to do that. <br/>

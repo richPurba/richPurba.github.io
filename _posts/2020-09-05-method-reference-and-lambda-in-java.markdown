@@ -4,6 +4,9 @@ title:  "Method Reference and Lambda in Java"
 date:   2020-09-05 00:00:00+02:00
 categories: java
 ---
+> DISCLAIMER: The views and opinions expressed here are those of the author and do not necessarily reflect the official policy or position of Accenture. Any content provided by our bloggers or authors are of their opinion and are not intended to malign any religion, ethnic group, club, organization, company, individual or anyone or anything.
+
+
 
 # The Mystery of Method Reference in Java
 If you google Method reference in Java, all of these example will eventually lead you to [Oracle's official tutorial](https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html). The example from Oracle is a little bit unclear and less extensive. But let me give you the basic idea of method reference before diving deep into the problem.

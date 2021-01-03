@@ -5,6 +5,10 @@ date:   2020-06-28 18:06:56 +0200
 categories: random
 ---
 
+> DISCLAIMER: The views and opinions expressed here are those of the author and do not necessarily reflect the official policy or position of Accenture. Any content provided by our bloggers or authors are of their opinion and are not intended to malign any religion, ethnic group, club, organization, company, individual or anyone or anything.
+
+
+
 # A Difficult time
 
 This last decade has been a bull market. Tons of investment has been poured to many startups or unicorns and the world sees a skyless, limitless optimism about the future. An outlook of opportunities, prosperity, confidence, and goodness.  Until corona crisis arrives...
