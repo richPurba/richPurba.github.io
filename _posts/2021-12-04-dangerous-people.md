@@ -9,6 +9,6 @@ categories: strategy, worldview
 
 
 # All True Philosophers
-What is a true mark of a real philosophers? They are *dangerous*. These men stand at the side of the truth, where lies don't have a chance to live. Could we describe a dangerous person as a killer? We could. But how about a dangerous person who believes and wills to tell the truth? </br>
+What is a true mark of a real philosophers? They are *dangerous*. These men stand at the side of the truth, where lies don't have a chance to live. Could we describe a dangerous person as a killer? We could. But how about a dangerous person who believes and wills to tell the truth? <br/>
 In allegory of cave, socrates describes a man who to tells the caveman the truth of the world beyond shadows. The caveman kills that outsider because he doesn't like to be told what is actually real out there. He just likes the representation of what is good and true. 
 We tend to get farsighted about this fact. We lose the understanding of our ownselves and the truth out there. Many dangerous people are great philosophers because they dare to discover the fundamental of the the truth at their bare condition. 
