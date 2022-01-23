@@ -4,7 +4,7 @@ title:  "Streams of Logic in Java"
 date:   2020-09-19 00:00:00+02:00
 categories: java
 ---
-> DISCLAIMER: The views and opinions expressed here are those of the author and do not necessarily reflect the official policy or position of Accenture. Any content provided by our bloggers or authors are of their opinion and are not intended to malign any religion, ethnic group, club, organization, company, individual or anyone or anything.
+> DISCLAIMER: The views and opinions expressed here are those of the author and do not necessarily reflect the official policy or position of Devoteam. Any content provided by our bloggers or authors are of their opinion and are not intended to malign any religion, ethnic group, club, organization, company, individual or anyone or anything.
 
 
 When Sanjay Ghemawat and Jeffrey Dean published their phenomenal paper [Map Reduce](https://research.google/pubs/pub62/), the whole world was taken by storm by the design of these two simple and powerful functions: **Map** and **Reduce**, hence the name. Ghemawat's work on on [Google File System](https://research.google/pubs/pub51/) was the harbinger of this MapReduce idea. It's very much a very influential Distributed System Design to the whole world of Computer Engineering. It's not a surprise if you see in great detail that Apache Kafka is built with a very similar design to Google File System. Dr. Ghemawat is very influential in the industry, especially in Distributed System. It's not a coincidence i think that he was supervised by a Dutch Professor at MIT, Frans Kaashoek, who has been very influential in the same domain of Distributed System (look at his very [easy-to-read book](https://ocw.mit.edu/resources/res-6-004-principles-of-computer-system-design-an-introduction-spring-2009/online-textbook/faults_open_5_0.pdf) )<br/>
@@ -12,7 +12,7 @@ When Sanjay Ghemawat and Jeffrey Dean published their phenomenal paper [Map Redu
 Even Java Streams API couldn't resist to get this idea implemented in JDK 8 (of course Joshua Bloch, one of the architects of Java, is employed by Google). If you see carefully how they build the reduce function (or *fold* as they phrase it), then you would see the similarity. Take a look at how Map Reduce works: you take any input, say list of strings, put it into several workers (the **Map** phase). Prior to that the Master has to *fork* the workers, administer the job, and do the **Reduce** phase where we different (reduce) workers take all the intermediate results and combined those with the same key and append the result of the same key (with the same order when it was mapped). Very neat and simple. 
 Let's see how a functional programming with Stream in Java works in an example.
 
-```
+```java
 var list = List.of("c","a","d","t");                \\ line 1
 Stream<String> someStream = list.stream();          \\ line 2
 Predicate<String> isItD = string -> !string.contains("d");
@@ -23,7 +23,7 @@ System.out.println(String.format("the word you received is : %s",word));// print
 ```
 It's very neat right? This is why i think Java can still be a winner compare to Scala, especially with the feature of Lambda and Stream. But the logic runs deeper than you think. It has the magic that Dr. Ghemawat introduced in 2004. The Stream API allows you to do this MapReduce processes in a manner of a fault-tolerant way. This doesn't look like that in the cover of how you write the code. At line 2, you just have to get the stream with `stream()` method. It then returns the `Stream<T>` interface of that particular type. Alluding to the MapReduce, Java refers the **Map** step at line 2. Well, you actually just map it to a Stream in this case (say a particular Object in the heap). But the good example of MapReduce is when you actually call:
 
-```
+```java
 Stream<String> someStream = list.parallelStream();
 ```
 This will produce many `Stream`s that can be described as *workers* (in MapReduce term). And yes, you are now mapping it into a worker. The stream is processed in parallel. One has to notice that the javadoc of this function doesn't really say that it *will be* parallel. To quote: 

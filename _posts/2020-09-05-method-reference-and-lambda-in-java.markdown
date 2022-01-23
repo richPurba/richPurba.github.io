@@ -4,7 +4,7 @@ title:  "Method Reference and Lambda in Java"
 date:   2020-09-05 00:00:00+02:00
 categories: java
 ---
-> DISCLAIMER: The views and opinions expressed here are those of the author and do not necessarily reflect the official policy or position of Accenture. Any content provided by our bloggers or authors are of their opinion and are not intended to malign any religion, ethnic group, club, organization, company, individual or anyone or anything.
+> DISCLAIMER: The views and opinions expressed here are those of the author and do not necessarily reflect the official policy or position of Devoteam. Any content provided by our bloggers or authors are of their opinion and are not intended to malign any religion, ethnic group, club, organization, company, individual or anyone or anything.
 
 
 
@@ -21,7 +21,7 @@ Thus, with better readability, you could write the best out of functional progra
 
 If you want to deep dive on this, you could go first to the concept of Lambda by Alfonso Church. It's rather abstract and confusing. But i will write here the general idea to help you with. This is quite important since the strictly typed Java language will know at compile time if you provide the wrong type in your lambda expression, as i stumbled upon this many times. I simply don't understand it. <br/>
 Alright. <br/>
-Church ambition was to create an abstraction of mathematical expression such that with that abstraction you can do some arithmatic out of it.
+Church ambition was to create an abstraction of mathematical expression such that with that abstraction you can do some arithmetic out of it.
 
 > f(x) = x + 1
 
@@ -44,7 +44,7 @@ JDK or Oracle will give you the list of kind of method reference that you can ap
 4. Reference to a constructor. In Java, somehow you can treat the keyword `new` if it's a method. `SomeClass::new` is somehow awkward but possible. This reminds me that when you have a nested classes, you would instantiate that inner class like `new OuterClass.new InnerClass();`
 
 ### So back to the point 3... 
-The actual comparison in method `sort` of `Arrays` utility class is being done or calculated by the some logic. The `sort` receives parameters `T[]`, which is generic `T`  (if you don't understand this, i will try to cover later. You can try to read [Benjamin Pierce's Type and Programming Language](https://www.cis.upenn.edu/~bcpierce/tapl/) as a starter) and `Comparator<? super T>`, which is a functional interface with lowerbound wildcard of generic `T` (which means you can provide any other object from `T` up to `Object` ). The lambda expression in Java captures all of the manipulation of the types very well: it knows that the method reference of `compareToIgnoreCase` has to be implemented such that you have two paramters to do the operation. As such it could fit `BiConsumer` interface.
+The actual comparison in method `sort` of `Arrays` utility class is being done or calculated by the some logic. The `sort` receives parameters `T[]`, which is generic `T`  (if you don't understand this, i will try to cover later. You can try to read [Benjamin Pierce's Type and Programming Language](https://www.cis.upenn.edu/~bcpierce/tapl/) as a starter) and `Comparator<? super T>`, which is a functional interface with lowerbound wildcard of generic `T` (which means you can provide any other object from `T` up to `Object` ). The lambda expression in Java captures all of the manipulation of the types very well: it knows that the method reference of `compareToIgnoreCase` has to be implemented such that you have two parameters to do the operation. As such it could fit `BiConsumer` interface.
 > `BiConsumer<String,String> bc = String::compareToIgnoreCase;`
 
 in a way that the operation or in the form of Lambda of Church `M[x]` will take the two types, say `a` and `b`, and do something like `a.compareToIgnoreCase(b)`, or in the java lambda: `(a,b) -> a.compareToIgnoreCase(b)`. Remember that `BiConsumer` has generic `T` and `U` as inputs, which in case of `bc` above, `String` for both arbitrary operations between `String` in `compareToIgnoreCase`. And the specification of both type have to be both `String` and `String` (or `CharSequence`, but since `String` `implements` `CharSequence`, they arey interchangeable), which is true in `compareToIgnoreCase` case (no pun intended). 
